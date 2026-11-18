@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrador | CAFETERIA LOS TRES ING</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .worker-management {
+      margin: 28px 0;
+      padding: 24px;
+      border: 1px solid #dfd2c5;
+      border-radius: 16px;
+      background: #fffdfb;
+    }
+    .worker-management h2 { margin: 0 0 8px; }
+    .worker-management p { margin-top: 6px; }
+    .worker-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      align-items: end;
+      margin-top: 18px;
+    }
+    .worker-form label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+    }
+    .worker-form input {
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 0;
+    }
+    .worker-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .worker-card {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid #eadfd5;
+      border-radius: 12px;
+      background: #fff;
+    }
+    .worker-card strong, .worker-card small { display: block; }
+    .worker-card small { margin-top: 4px; color: #76685e; }
+    .worker-delete {
+      border: 1px solid #b84b43;
+      border-radius: 8px;
+      padding: 9px 13px;
+      background: #fff;
+      color: #a3332d;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .worker-delete:hover { background: #fff1ef; }
+    .worker-empty { padding: 16px; border-radius: 10px; background: #f7f1eb; }
+    @media (max-width: 600px) {
+      .worker-management { padding: 16px; }
+      .worker-form button { width: 100%; }
+    }
+  </style>
+
+
+  <style>
+    .order-status-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #eadfd3;
+    }
+    .order-status-actions button {
+      border: 0;
+      border-radius: 8px;
+      padding: 9px 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .order-status-actions button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+    .status-progress-btn { background: #fff0d8; color: #87520b; }
+    .status-complete-btn { background: #e4f4e8; color: #24643a; }
+    .status-current-note { color: #76685e; font-size: .85rem; margin-top: 10px; }
+    .order-status.pending { background: #fff0d8; color: #87520b; }
+    .order-status.processing { background: #e5efff; color: #28558e; }
+    .order-status.completed { background: #e4f4e8; color: #24643a; }
+    @media (max-width: 600px) {
+      .order-status-actions button { flex: 1 1 100%; }
+    }
+  </style>
+
+</head>
+<body class="admin-page">
+  <header class="admin-header">
+    <a class="logo" href="home.html">☕ CAFETERIA LOS <span>TRES ING</span></a>
+    <a href="index.html">Volver al inicio de sesión</a>
+  </header>
+  <main class="admin-main">
+    <section class="admin-login" id="adminLogin">
+      <div class="login-mark">🔐</div>
+      <p class="eyebrow">ÁREA PRIVADA</p>
+      <h1>Acceso de administrador</h1>
+      <p>Inicia sesión para consultar los pedidos de la cafetería.</p>
+      <form id="adminLoginForm">
+        <label for="adminEmail">Correo del administrador</label>
+        <input id="adminEmail" type="email" placeholder="admin@cafeteria.com" required>
+        <label for="adminPassword">Contraseña</label>
+        <input id="adminPassword" type="password" placeholder="Contraseña" required>
+        <p class="form-message" id="adminMessage" role="status"></p>
+        <button class="button button-primary" type="submit">Entrar al panel</button>
+      </form>
+      <small>Acceso de demostración escolar.</small>
+    </section>
+
+    <section class="admin-dashboard" id="adminDashboard" hidden>
+      <div class="admin-title-row">
+        <div><p class="eyebrow">PANEL DE CONTROL</p><h1>Administración de pedidos</h1><p>Consulta los pedidos realizados y los que fueron cancelados.</p></div>
+        <button class="button button-outline" id="adminLogout">Cerrar sesión</button>
+      </div>
+
+      <section class="worker-management" id="workerManagement" hidden>
+        <div class="worker-heading">
+          <div>
+            <p class="eyebrow">CUENTAS DEL PERSONAL</p>
+            <h2>Administrar trabajadores</h2>
+            <p>Estas cuentas son independientes de las cuentas de los clientes.</p>
+          </div>
+        </div>
+        <form id="workerForm" class="worker-form">
+          <div>
+            <label for="workerName">Nombre del trabajador</label>
+            <input id="workerName" type="text" placeholder="Nombre completo" required>
+          </div>
+          <div>
+            <label for="workerEmail">Correo electrónico</label>
+            <input id="workerEmail" type="email" placeholder="trabajador@cafeteria.com" required>
+          </div>
+          <div>
+            <label for="workerPassword">Contraseña</label>
+            <input id="workerPassword" type="password" placeholder="Mínimo 4 caracteres" minlength="4" required>
+          </div>
+          <button class="button button-primary" type="submit">Agregar trabajador</button>
+        </form>
+        <p class="form-message" id="workerMessage" role="status"></p>
+        <div id="workerList" class="worker-list"></div>
+      </section>
+
+      <div class="admin-stats">
+        <article><span>Total de pedidos</span><strong id="totalOrders">0</strong></article>
+        <article><span>Pedidos activos</span><strong id="activeOrders">0</strong></article>
+        <article><span>Pedidos cancelados</span><strong id="cancelledOrders">0</strong></article>
+      </div>
+      <div class="admin-toolbar">
+        <div><h2>Pedidos registrados</h2><p id="ordersDescription">Todos los pedidos de la cafetería.</p></div>
+        <div class="admin-filters">
+          <button class="admin-filter active" data-status="Todos">Todos</button>
+          <button class="admin-filter" data-status="Pendiente">Pendientes</button>
+          <button class="admin-filter" data-status="En proceso">En proceso</button>
+          <button class="admin-filter" data-status="Completado">Completados</button>
+          <button class="admin-filter" data-status="Cancelado">Cancelados</button>
+        </div>
+      </div>
+      <div id="adminOrders" class="admin-orders"></div>
+      <p class="admin-footnote">Los pedidos se guardan en el almacenamiento local del navegador utilizado para esta demostración.</p>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>

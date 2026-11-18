@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CAFETERIA LOS TRES ING: café, bebidas y postres preparados con cariño.">
+  <title>CAFETERIA LOS TRES ING | Un momento para ti</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="#inicio"><span class="logo-icon">☕</span> CAFETERIA LOS <span>TRES ING</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+    <nav id="nav">
+      <a href="#inicio">Inicio</a>
+      <a href="#menu">Menú</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+      <a href="index.html" id="accountLink">Mi cuenta</a>
+      <button class="cart-button" id="openCart">🛒 Carrito <span id="cartCount">0</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <p class="eyebrow">UN CAFÉ, UN RESPIRO, TU MOMENTO</p>
+        <h1>Pequeños momentos,<br><span>grandes sabores.</span></h1>
+        <p class="hero-description">Café recién preparado, postres deliciosos y un lugar acogedor para disfrutar cada día.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#menu">Explorar menú</a>
+          <a class="button button-outline" href="#nosotros">Conócenos</a>
+        </div>
+        <div class="hero-note"><span>★ ★ ★ ★ ★</span> Hecho con cariño en cada taza</div>
+      </div>
+      <div class="hero-image" role="img" aria-label="Taza de café en una mesa acogedora">
+        <div class="image-badge"><strong>100%</strong><span>Buen aroma<br>y buen sabor</span></div>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="menu">
+      <div class="section-heading">
+        <p class="eyebrow">PARA TODOS LOS GUSTOS</p>
+        <h2>Nuestro <span>menú</span></h2>
+        <p>Encuentra tu favorito y disfruta de algo rico.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrar productos">
+        <button class="filter active" data-filter="Todos">Todo</button>
+        <button class="filter" data-filter="Café">Café</button>
+        <button class="filter" data-filter="Fríos">Bebidas frías</button>
+        <button class="filter" data-filter="Postres">Postres</button>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="promo">
+      <div class="promo-icon">☕</div>
+      <div>
+        <p class="eyebrow">TU PAUSA FAVORITA</p>
+        <h2>La felicidad también viene en una taza.</h2>
+        <p>Ven por tu bebida favorita y acompáñala con algo dulce.</p>
+      </div>
+      <a class="button button-light" href="#menu">Ver productos</a>
+    </section>
+
+    <section class="section about-section" id="nosotros">
+      <div class="about-photo" role="img" aria-label="Interior cálido de una cafetería"></div>
+      <div class="about-copy">
+        <p class="eyebrow">UN LUGAR PARA DISFRUTAR</p>
+        <h2>Más que café,<br><span>un momento especial.</span></h2>
+        <p>En Café Aurora creemos que las cosas sencillas pueden hacer el día mejor. Por eso preparamos nuestras bebidas al momento y acompañamos cada taza con un ambiente tranquilo y acogedor.</p>
+        <div class="about-points">
+          <div><span>☕</span><strong>Preparado al momento</strong></div>
+          <div><span>♡</span><strong>Atención cercana</strong></div>
+          <div><span>🍰</span><strong>Algo rico para acompañar</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+      <div>
+        <p class="eyebrow">NOS ENCANTARÍA VERTE</p>
+        <h2>Tu próxima taza<br><span>te está esperando.</span></h2>
+        <p>Estos datos son de ejemplo. Puedes reemplazarlos por los de tu cafetería.</p>
+      </div>
+      <div class="contact-card">
+        <p>📍 <strong>Dirección:</strong> Calle del Café #123, Jalpan de Serra</p>
+        <p>🕒 <strong>Horario:</strong> Lunes a sábado, 8:00 a. m. – 8:00 p. m.</p>
+        <p>📞 <strong>Teléfono:</strong> 441 125 3568</p>
+        <a class="button button-primary" href="mailto:hola@cafeterialosing.example">Escríbenos</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo footer-logo" href="#inicio">☕ CAFETERIA LOS <span>TRES ING</span></a>
+    <p>Hecho con amor y cariño.  <span id="year"></span></p>
+    <a href="admin.html">Administrador</a>
+    <a href="#inicio">Volver arriba ↑</a>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay" aria-hidden="true">
+    <aside class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="cart-heading">
+        <h2 id="cartTitle">Tu carrito 🛒</h2>
+        <button id="closeCart" class="close-button" aria-label="Cerrar carrito">×</button>
+      </div>
+      <div id="cartItems" class="cart-items"><p class="empty-cart">Todavía no agregas productos.</p></div>
+      <div class="cart-total"><span>Total</span><strong id="cartTotal">$0.00</strong></div>
+      <button class="button button-primary checkout-button" id="checkout">Finalizar pedido</button>
+      <p class="cart-note">Demostración escolar: no se realizan pagos reales.</p>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <div class="ticket-overlay" id="ticketOverlay" aria-hidden="true">
+    <section class="ticket-card" role="dialog" aria-modal="true" aria-labelledby="ticketTitle">
+      <div class="ticket-actions">
+        <button type="button" class="ticket-close" id="closeTicket" aria-label="Cerrar">×</button>
+      </div>
+      <div id="ticketContent"></div>
+      <div class="ticket-buttons">
+        <button type="button" class="button button-primary" id="printTicket">Imprimir ticket</button>
+        <button type="button" class="button button-outline" id="cancelOrder">Cancelar pedido</button>
+        <button type="button" class="button button-outline" id="finishTicket">Aceptar</button>
+      </div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
